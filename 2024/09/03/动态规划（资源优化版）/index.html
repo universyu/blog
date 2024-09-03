@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>动态规划（资源优化版） | countingstars</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="特点 有限的资源组合出尽可能大的答案，答案关于资源数单调不减，这里的单调不减指的是资源越多答案只可能越优，不可能变差  线性 dp（基础版）特点 只在一个维度资源有限，另外的维度视作无限资源  解决方法 资源从小到大递推 求出转移方程  例题1、牛吃草问题问题描述有 n 块草地坐标范围 Li-Ri，每块草地有 Ri-Li+1 份草，不能选择有重叠区域的草地，最多能吃多少草？ 代码逻辑 有限的资源（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划（资源优化版）">
+<meta property="og:url" content="https://blog.countingstars.cc/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%89%88%EF%BC%89/index.html">
+<meta property="og:site_name" content="countingstars">
+<meta property="og:description" content="特点 有限的资源组合出尽可能大的答案，答案关于资源数单调不减，这里的单调不减指的是资源越多答案只可能越优，不可能变差  线性 dp（基础版）特点 只在一个维度资源有限，另外的维度视作无限资源  解决方法 资源从小到大递推 求出转移方程  例题1、牛吃草问题问题描述有 n 块草地坐标范围 Li-Ri，每块草地有 Ri-Li+1 份草，不能选择有重叠区域的草地，最多能吃多少草？ 代码逻辑 有限的资源（">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-03T14:31:55.000Z">
+<meta property="article:modified_time" content="2024-09-03T14:32:07.618Z">
+<meta property="article:author" content="Lios">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="countingstars" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">countingstars</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"
+          ><span class="fa fa-bars"></span
+        ></a>
+        
+        <a class="main-nav-link" href="/"
+          >Home</a
+        >
+        
+        <a class="main-nav-link" href="/archives"
+          >Archives</a
+        >
+        
+      </nav>
+      <nav id="sub-nav">
+          
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.countingstars.cc"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-动态规划（资源优化版）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%89%88%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2024-09-03T14:31:55.000Z" itemprop="datePublished">2024-09-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      动态规划（资源优化版）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ul>
+<li>有限的资源组合出尽可能大的答案，答案关于资源数单调不减，这里的单调不减指的是资源越多答案只可能越优，不可能变差</li>
+</ul>
+<h2 id="线性-dp（基础版）"><a href="#线性-dp（基础版）" class="headerlink" title="线性 dp（基础版）"></a>线性 dp（基础版）</h2><h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>只在一个维度资源有限，另外的维度视作无限资源</li>
+</ul>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ul>
+<li>资源从小到大递推</li>
+<li>求出转移方程</li>
+</ul>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="1、牛吃草问题"><a href="#1、牛吃草问题" class="headerlink" title="1、牛吃草问题"></a>1、牛吃草问题</h4><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p>有 n 块草地坐标范围 L<del>i</del>-R<del>i</del>，每块草地有 R<del>i</del>-L<del>i</del>+1 份草，不能选择有重叠区域的草地，最多能吃多少草？</p>
+<h5 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>有限的资源（n 块草地）吃到尽可能多的草，草地变多，答案单调不减</li>
+<li>只要有草就能吃，容量无限</li>
+<li>吃草的终点坐标从小到大递推，那么资源也就从小到大递推</li>
+<li>dp[i]&gt;dp[j]当且仅当 dp[i]中选择了右端点处于 j+1 到 i 的草地</li>
+<li>状态转移时，尽可能从近的状态转移（因为答案关于资源单调不减）</li>
+<li>选 i 为终点的草地，转移方程见 for 循环, 不选 i 为终点的草地，转移方程 dp[i]&#x3D;dp[i-1]，两者选择一个答案最优的</li>
+</ul>
+<h5 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; right_left[maxn];</span><br><span class="line"><span class="comment">//对于每一个右端点，存下它的所有左端点,right的下标表示右端点，对应的容器中的值表示与此右端点对应的左端点</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=right_max;i++) <span class="comment">//right_max为数据中最大的右端点</span></span><br><span class="line">   &#123;</span><br><span class="line">    	   dp[i] = dp[i<span class="number">-1</span>]; <span class="comment">//不选以i为终点的草地</span></span><br><span class="line"></span><br><span class="line">          <span class="keyword">for</span>(<span class="type">int</span> ver : right_left[i])</span><br><span class="line">          &#123;</span><br><span class="line">              <span class="keyword">if</span>(dp[ver<span class="number">-1</span>] + i - ver + <span class="number">1</span> &gt; dp[i] )</span><br><span class="line">                  dp[i] = dp[ver<span class="number">-1</span>] + i - ver + <span class="number">1</span>;</span><br><span class="line">   <span class="comment">//如果dp[i]从下标ver到i-1的dp值转移而来，这个dp值要么等于dp[ver-1]，要么这个dp值对应的状态和当下冲突</span></span><br><span class="line">          &#125;</span><br><span class="line">   &#125;</span><br><span class="line">cout&lt;&lt;dp[right_max];</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、物品摆放问题"><a href="#2、物品摆放问题" class="headerlink" title="2、物品摆放问题"></a>2、物品摆放问题</h4><h5 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h5><p>有 n 个位置可以摆放物品，物品无限，但要求两者之间至少有 k 个空位，什么物品都不摆放也算一种方案，一共有多少种摆放方案？</p>
+<h5 id="代码逻辑-1"><a href="#代码逻辑-1" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>有限的资源（n 个位置）求尽可能多的摆放方案，位置变多，答案单调不减</li>
+<li>只要有合法位置就能摆物品，物品无限</li>
+<li>摆放物品的终点从小到大递推，那么资源也就从小到大递推</li>
+<li>第 n 个位置要么摆放物品要么不摆放物品，两种对应的情况数相加得到答案</li>
+</ul>
+<h5 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">//只考虑0个位置，即什么都不放</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       dp[i] = dp[i<span class="number">-1</span>]; <span class="comment">//第i个位置不摆放物品</span></span><br><span class="line">       <span class="comment">//加上第i个位置摆放物品的方案</span></span><br><span class="line">       dp[i] += i-k<span class="number">+1</span>&gt;<span class="number">0</span> ? dp[i-k<span class="number">+1</span>] : <span class="number">1</span>;</span><br><span class="line">  <span class="comment">//i-k+1&lt;=0时，只有前面什么物品都不放才能在i这里放物品，只加一种情况</span></span><br><span class="line">  <span class="comment">//i-k+1&gt;0时，从i-k+2到i-1必然都没有物品且第i位有物品，后面定了，所以前面有多少种方案就加多少种方案</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="滚动数组"><a href="#滚动数组" class="headerlink" title="滚动数组"></a>滚动数组</h2><h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>有限的资源和有限的容量组合出尽可能大的结果，相同的资源条件下，结果随容量单调不减，但各结果无递归关系，当下结果只与前一个资源条件下的结果有关</li>
+</ul>
+<h3 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h3><h4 id="1、奇怪的数列"><a href="#1、奇怪的数列" class="headerlink" title="1、奇怪的数列"></a>1、奇怪的数列</h4><h5 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h5><p>n 个数字构成和为 s 的数列，其中 a<del>i</del>只能加 a 或者减 b 到 a<del>i+1</del>，求满足条件的数列有多少个</p>
+<h5 id="代码逻辑-2"><a href="#代码逻辑-2" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>把+a 和-b 都视作+P</li>
+<li>求和时，a<del>0</del>-a<del>n-1</del>的+P 的权重为 0 到 n-1，$$\sum_{i&#x3D;0}^{n-1}$$a<del>i</del> &#x3D; na<del>0</del>+$$\frac{n(n-1)P}{2}$$，$$\frac{n(n-1)}{2}$$里面有 i 次是+a 时，权重分配方案为 dp<del>i</del>,各种分配方案求出来的 a<del>0</del>是定值，如果是整数，那么答案加 dp<del>i</del>，否则，答案加 0</li>
+<li>有限的资源（n 个数列元素），有限的容量（分配给+a 的权重至多为$$\frac{n(n-1)}{2}$$,这里 n 表示当下资源规模）外循环表示资源从小到大</li>
+<li>dp<del>ij</del>&#x3D;dp<del>(i-1)j</del>+dp<del>(i-1)(j-i)</del>，把第一层维度放到外循环上</li>
+</ul>
+<h5 id="核心代码-2"><a href="#核心代码-2" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>]=<span class="number">1</span>; <span class="comment">//规模为1时，无权重可分，只有dp[0]为1，其他为0</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;n;i++) <span class="comment">//问题规模为1+i，终点为下标为i的数列元素</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">//滚动数组先默认继承了上一个状态的值，相当于i号元素权重不给+a的方案数</span></span><br><span class="line">       <span class="comment">//然后再加上i号元素的权重赋给+a的方案数</span></span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=(i<span class="number">+1</span>)*i/<span class="number">2</span>;j&gt;=i;j--)</span><br><span class="line">           dp[j] += dp[j-i]; <span class="comment">//如果j本身小于i，那么i号元素权重赋给+a的方案数为0，也就是dp[j]+=0</span></span><br><span class="line">   &#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=n*(n<span class="number">-1</span>)/<span class="number">2</span>;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="type">int</span> a0 = s + b * ( n*(n<span class="number">-1</span>)/<span class="number">2</span> - i ) - a * i ;</span><br><span class="line">       <span class="keyword">if</span> (a0%n==<span class="number">0</span>)</span><br><span class="line">           ans += dp[i];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、背包问题（基础版）"><a href="#2、背包问题（基础版）" class="headerlink" title="2、背包问题（基础版）"></a>2、背包问题（基础版）</h4><h5 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h5><p>有一个容量 V 的背包，有 n 个物品体积分别为 v<del>i</del>，求出背包用掉的最大容量</p>
+<h5 id="代码逻辑-3"><a href="#代码逻辑-3" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>有限资源（n 个物品），有限容量（V）要求组合出尽可能大的体积</li>
+<li>dp<del>ij</del>&#x3D;dp<del>(i-1)j</del>+dp<del>(i-1)(j-v)</del>+v 可以把第一维度体现在外循环上</li>
+<li>状态转移时，用尽可能贴近的 dp 值做转移，因为答案单调不减</li>
+</ul>
+<h5 id="核心代码-3"><a href="#核心代码-3" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)  <span class="comment">//考虑前i件物品</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">//默认第i件物品不放入</span></span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=V;j&gt;=V-v[i];j--)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="comment">//如果第i件物品可以放入，且放入结果更大，就放入</span></span><br><span class="line">           <span class="keyword">if</span>( dp[j] &lt; dp[ j - v[i] ] + v[i] )</span><br><span class="line">               dp[j] = dp[ j - v[i] ] + v[i];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、多重背包"><a href="#3、多重背包" class="headerlink" title="3、多重背包"></a>3、多重背包</h4><h5 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h5><p>背包有 V 容量，n 种商品分别有价值量 w<del>i</del>，体积 v<del>i</del>和数量 s<del>i</del>，求出背包可以装下的最大价值</p>
+<h5 id="代码逻辑-4"><a href="#代码逻辑-4" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>有限的资源（n 种商品），有限的容量（背包容量 V）求出尽可能大的价值量</li>
+<li>dp<del>ij</del>&#x3D;dp<del>(i-1)j</del>+dp<del>(i-1)(j-v)</del>+w 可以把第一维度体现在外循环上</li>
+<li>外循环表示物品种类一件件增加，问题规模从小到大</li>
+<li>每考虑一种商品需要考虑 s<del>i</del>次状态转移，把 s<del>i</del>二进制分解，减少计算次数</li>
+</ul>
+<h5 id="核心代码-4"><a href="#核心代码-4" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       cin&gt;&gt;w&gt;&gt;v&gt;&gt;s;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=s;s-=j,j+=j) <span class="comment">// 每次循环代表的物品体积j*v，价值j*w</span></span><br><span class="line">       &#123;</span><br><span class="line">           <span class="comment">//默认这件物品不放入</span></span><br><span class="line">           <span class="keyword">for</span>(<span class="type">int</span> k=V;k&gt;=j*v;k--)</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="comment">//如果这件物品可以放入，且放入结果更大，就放入</span></span><br><span class="line">               <span class="keyword">if</span>(dp[k] &lt; dp[k-j*v] + j * w)</span><br><span class="line">                   dp[k] = dp[k-j*v] + j * w;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span>(s&gt;<span class="number">0</span>)  <span class="comment">//s未被分尽</span></span><br><span class="line">       &#123;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> k=V;k&gt;=s*v;k--)</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">if</span>(dp[k] &lt; dp[k-s*v] + s * w)</span><br><span class="line">                   dp[k] = dp[k-s*v] + s * w;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="背包问题拓展"><a href="#背包问题拓展" class="headerlink" title="背包问题拓展"></a>背包问题拓展</h2><h3 id="例题-2"><a href="#例题-2" class="headerlink" title="例题"></a>例题</h3><h4 id="1、完全背包"><a href="#1、完全背包" class="headerlink" title="1、完全背包"></a>1、完全背包</h4><h5 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h5><p>背包容量 V，n 种商品具有价值量 w<del>i</del>和体积 v<del>i</del>，每种商品都可以无限次购买，求背包装下的最大价值</p>
+<h5 id="代码逻辑-5"><a href="#代码逻辑-5" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>有限的资源（n 种商品），有限的容量（背包容量 V），组成尽可能大的价值</li>
+<li>dp<del>ij</del>&#x3D;dp<del>(i-1)j</del>(j&lt;v<del>i</del>)，dp<del>ij</del>&#x3D;max(dp<del>ij</del> , dp<del>i(j-vi)</del>+w<del>i</del>) 先用外循环继承上一个状态的结果，再用内循环从前向后递推</li>
+</ul>
+<h5 id="核心代码-5"><a href="#核心代码-5" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=v[i];j&lt;=V;j++)</span><br><span class="line">       &#123;</span><br><span class="line">        	dp[j] = <span class="built_in">max</span>(dp[j],dp[ j - v[i] ] + w[i])</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二维-dp"><a href="#二维-dp" class="headerlink" title="二维 dp"></a>二维 dp</h2><h3 id="特点-3"><a href="#特点-3" class="headerlink" title="特点"></a>特点</h3><p>状态转移时，必须考虑两个维度</p>
+<h3 id="例题-3"><a href="#例题-3" class="headerlink" title="例题"></a>例题</h3><h4 id="1、砝码称重"><a href="#1、砝码称重" class="headerlink" title="1、砝码称重"></a>1、砝码称重</h4><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>N 个砝码分别重 W<del>i</del>，求出最多可以称量多少种重量</p>
+<h5 id="代码逻辑-6"><a href="#代码逻辑-6" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>如果只用一维数组，那么 dp<del>i</del>能表示的信息只有前 i 个砝码可以称出多少种重量，但是考虑状态转移的时候发现，由于不知道到底具体哪些重量可以被称出来，所以无法排重。比如 dp<del>i</del>&#x3D;3 时，如果四个砝码可以称出重量 10，无法确定 dp<del>4</del>应该比 dp<del>3</del>大还是和 dp<del>3</del>一样大</li>
+<li>用二维数组 dp<del>ij</del>表示前 i 个砝码是否可以称出重量 j</li>
+</ul>
+<h5 id="核心代码-6"><a href="#核心代码-6" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="comment">//资源从小到大遍历</span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> j=sumW;j&gt;=<span class="number">1</span>;j--)</span><br><span class="line">      &#123;</span><br><span class="line">         	<span class="keyword">if</span>(dp[i<span class="number">-1</span>][j]) <span class="comment">//继承</span></span><br><span class="line">              dp[i][j] = <span class="literal">true</span>;</span><br><span class="line">         	<span class="keyword">else</span> <span class="keyword">if</span>(j==w[i]) <span class="comment">//只用i这个砝码</span></span><br><span class="line">              dp[i][j] = <span class="literal">true</span>;</span><br><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span>(dp][i<span class="number">-1</span>][ j + w[i] ]) <span class="comment">//第i个砝码和物品在天平同一边</span></span><br><span class="line">              dp[i][j] = <span class="literal">true</span>;</span><br><span class="line">          <span class="comment">//第i个砝码与物品分别在天平的两边</span></span><br><span class="line">         	<span class="keyword">else</span> <span class="keyword">if</span>(j&lt;w[i] &amp;&amp; dp[i<span class="number">-1</span>][ w[i] - j ])</span><br><span class="line">              dp[i][j] = <span class="literal">true</span>;</span><br><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span>(j&gt;w[i] &amp;&amp; dp[i<span class="number">-1</span>][ j - w[i] ])</span><br><span class="line">              dp[i][j] = <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="状态压缩-dp"><a href="#状态压缩-dp" class="headerlink" title="状态压缩 dp"></a>状态压缩 dp</h2><h3 id="特点-4"><a href="#特点-4" class="headerlink" title="特点"></a>特点</h3><p>总状态数不多，可以用二进制表示</p>
+<h3 id="例题-4"><a href="#例题-4" class="headerlink" title="例题"></a>例题</h3><h4 id="1、买糖果"><a href="#1、买糖果" class="headerlink" title="1、买糖果"></a>1、买糖果</h4><h5 id="问题描述-6"><a href="#问题描述-6" class="headerlink" title="问题描述"></a>问题描述</h5><p>商店有 n 包糖，每包糖里面有 k 种口味，一共有 m（&lt;&#x3D;20）种口味，每包糖里面的口味用数字 1 到 20 表示，最少买几包糖可以吃遍所有口味</p>
+<h5 id="代码逻辑-7"><a href="#代码逻辑-7" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>用二进制对口味编码，口味的数字为 i，那么二进制第 i-1 位就为 1，编码出来的一个二进制数就代表一种口味组合</li>
+<li>资源从小遍历到大，如果某种口味组合可以被买到，那么它再加上当下的这包糖果的组合也可以被买到</li>
+</ul>
+<h5 id="核心代码-预处理"><a href="#核心代码-预处理" class="headerlink" title="核心代码_预处理"></a>核心代码_预处理</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求出每包糖果的口味组合</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=k;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           cin&gt;&gt;taste;</span><br><span class="line">           pac[i] |= ( <span class="number">1</span>&lt;&lt; (taste<span class="number">-1</span>) );</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">max_taste = ( <span class="number">1</span>&lt;&lt;m ) - <span class="number">1</span>; <span class="comment">//从第0位到第m-1位都是1</span></span><br><span class="line"><span class="built_in">memset</span>(dp,inf,<span class="built_in">sizeof</span>(dp)); <span class="comment">//初始化所有口味组合都无法买到</span></span><br><span class="line">dp[<span class="number">0</span>] = <span class="number">0</span>;  <span class="comment">//口味组合：什么口味都不要，这种情况买0包就可以了</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="核心代码-状态转移"><a href="#核心代码-状态转移" class="headerlink" title="核心代码_状态转移"></a>核心代码_状态转移</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;=max_taste;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span>(dp[j]&lt;inf) <span class="comment">//可以买到口味组合j</span></span><br><span class="line">           &#123;</span><br><span class="line">           <span class="comment">//买到了口味组合j的基础上，买下当下这包糖果，可以让口味组合j|pac[i]所需的糖果更少，那么就更新答案</span></span><br><span class="line">               dp[ j | pac[i] ] = <span class="built_in">min</span>( dp[ j | pac[i] ], dp[j] + <span class="number">1</span> );</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.countingstars.cc/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%89%88%EF%BC%89/" data-id="cm0mj3c8v00001cto3tpr99yh" data-title="动态规划（资源优化版）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/09/03/%E5%9B%BE%E8%AE%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">图论</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%89%88%EF%BC%89/">动态规划（资源优化版）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%9B%BE%E8%AE%BA/">图论</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%AD%90%E9%97%AE%E9%A2%98%E6%9C%80%E4%BC%98%E8%A7%A3%E9%80%92%E6%8E%A8%EF%BC%89/">动态规划（子问题最优解递推）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/Manacher%E7%AE%97%E6%B3%95/">Manacher算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Lios<br />
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
