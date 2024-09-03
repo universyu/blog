@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>搜索 | countingstars</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="BFS概述将当下遍历到的结点的子结点都入队列，只要队列不空，就不断令元素出队，由于先入队的先出队，此算法可以实现广度优先搜索 例题1、迷宫最值问题描述n*m 的整型数地图，第一行和最后一行都是 0，从第一行任一点进入，出到第 n 行任一点，途中经过的最大数字为代价，求最小代价 代码逻辑 利用BFS结合二分法求解  核心代码123456789101112131415161718192021bool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜索">
+<meta property="og:url" content="https://blog.countingstars.cc/2024/09/03/%E6%90%9C%E7%B4%A2/index.html">
+<meta property="og:site_name" content="countingstars">
+<meta property="og:description" content="BFS概述将当下遍历到的结点的子结点都入队列，只要队列不空，就不断令元素出队，由于先入队的先出队，此算法可以实现广度优先搜索 例题1、迷宫最值问题描述n*m 的整型数地图，第一行和最后一行都是 0，从第一行任一点进入，出到第 n 行任一点，途中经过的最大数字为代价，求最小代价 代码逻辑 利用BFS结合二分法求解  核心代码123456789101112131415161718192021bool">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-03T14:33:15.000Z">
+<meta property="article:modified_time" content="2024-09-03T14:33:23.998Z">
+<meta property="article:author" content="Lios">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="countingstars" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">countingstars</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"
+          ><span class="fa fa-bars"></span
+        ></a>
+        
+        <a class="main-nav-link" href="/"
+          >Home</a
+        >
+        
+        <a class="main-nav-link" href="/archives"
+          >Archives</a
+        >
+        
+      </nav>
+      <nav id="sub-nav">
+          
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.countingstars.cc"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-搜索" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/03/%E6%90%9C%E7%B4%A2/" class="article-date">
+  <time class="dt-published" datetime="2024-09-03T14:33:15.000Z" itemprop="datePublished">2024-09-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      搜索
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>将当下遍历到的结点的子结点都入队列，只要队列不空，就不断令元素出队，由于先入队的先出队，此算法可以实现广度优先搜索</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h3 id="1、迷宫最值"><a href="#1、迷宫最值" class="headerlink" title="1、迷宫最值"></a>1、迷宫最值</h3><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p>n*m 的整型数地图，第一行和最后一行都是 0，从第一行任一点进入，出到第 n 行任一点，途中经过的最大数字为代价，求最小代价</p>
+<h4 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul>
+<li>利用<strong>BFS</strong>结合<strong>二分法</strong>求解</li>
+</ul>
+<h4 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">bfs</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> ans)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       queue&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt; q;</span><br><span class="line">       q.<span class="built_in">push</span>(<span class="built_in">make_pair</span>(x,y));</span><br><span class="line">       visited[x][y] = <span class="literal">true</span>;</span><br><span class="line">       <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="type">int</span> xx = q.<span class="built_in">front</span>().first, yy = q.<span class="built_in">front</span>().second;</span><br><span class="line">           <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++) <span class="comment">//上下左右位移</span></span><br><span class="line">           &#123;</span><br><span class="line">               <span class="type">int</span> nx = xx + dx[i], ny = yy + dy[i];</span><br><span class="line">               <span class="keyword">if</span>(nx&lt;<span class="number">1</span>||nx&gt;n||ny&lt;<span class="number">1</span>||ny&gt;m||visited[nx][ny]||mp[nx][ny]&gt;ans)</span><br><span class="line">                   <span class="keyword">continue</span>;</span><br><span class="line">               <span class="keyword">if</span>(nx==n)</span><br><span class="line">                   <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">               visited[nx][ny] = <span class="literal">true</span>;</span><br><span class="line">               q.<span class="built_in">push</span>(<span class="built_in">make_pair</span>(nx,ny));</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>利用递归的特性实现深度优先算法</li>
+</ul>
+<h3 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h3><h4 id="1、淹没海岛"><a href="#1、淹没海岛" class="headerlink" title="1、淹没海岛"></a>1、淹没海岛</h4><h5 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h5><p>N*N 的地图，’.’表示海洋，’#’表示陆地，数据保证第一行、第一列、最后一行、最后一列为海洋，联通的陆地视作同一个海岛，只有上下左右都是陆地的陆地才不被淹没，求被淹没的海岛数量</p>
+<h5 id="代码逻辑-1"><a href="#代码逻辑-1" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>分别求出淹没前后的海岛数量，做减法就是答案</li>
+<li>一个地图存储初始数据，还有一个地图存储实行淹没后的数据，被淹没的陆地用另一个符号*来表示，dfs 实现淹没操作的时候就是把非.处修改为. 所以初始化淹没地图的时候不能把陆地直接改为.</li>
+<li>计算海岛数时，有一块陆地就把答案增 1 且 dfs 把与它相连的陆地都变成海洋</li>
+</ul>
+<h5 id="核心代码-计算海岛数量"><a href="#核心代码-计算海岛数量" class="headerlink" title="核心代码_计算海岛数量"></a>核心代码_计算海岛数量</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">2</span>;j&lt;n;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span>(mp[i][j]==<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">           &#123;</span><br><span class="line">               ans++;</span><br><span class="line">               <span class="built_in">dfs</span>(i,j).</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="核心代码-深搜"><a href="#核心代码-深搜" class="headerlink" title="核心代码_深搜"></a>核心代码_深搜</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">    	mp[x][y] = <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="type">int</span> nx = x + dx[i], ny = y + dy[i];</span><br><span class="line">           <span class="keyword">if</span>(nx&gt;<span class="number">1</span> &amp;&amp; nx&lt;n &amp;&amp; ny&gt;<span class="number">1</span> &amp;&amp; ny&lt;n &amp;&amp; mp[nx][ny]!=<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">               <span class="built_in">dfs</span>(nx,ny);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、树上求和"><a href="#2、树上求和" class="headerlink" title="2、树上求和"></a>2、树上求和</h4><h5 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h5><p>有 n 个结点 n-1 条边构成树，每个结点存一个整数（有正有负） 求最大和</p>
+<h5 id="代码逻辑-2"><a href="#代码逻辑-2" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>对每一个结点都当作根结点应用 dfs 求得子树和的最大值，在所有结点的最大值中取最大的，由于要让每一个结点都作为根结点且走完整子树，所以这是 dfs 问题不是 bfs 问题</li>
+<li>利用 fath 参数防止走入父结点，dp 数组初始化为各结点存储的值</li>
+</ul>
+<h5 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> cur,<span class="type">int</span> fath)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       dp[cur] = data[cur];</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> ver : edge[cur])</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span>(ver==fath)</span><br><span class="line">               <span class="keyword">continue</span>;</span><br><span class="line">           <span class="built_in">dfs</span>(ver,cur);</span><br><span class="line">           dp[cur] += dp[ver] &gt; <span class="number">0</span> ? dp[ver] : <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h2><h3 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h3><p>将过程答案记下，以此达到减枝的效果</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>往往是求约束条件下的方案数</li>
+</ul>
+<h3 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(condition <span class="number">1</span>,condition <span class="number">2</span>,...)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(dp[condition1][condition2]....!=初始化的值)</span><br><span class="line">          <span class="keyword">return</span> dp[condition1][condition2]....</span><br><span class="line">      <span class="keyword">if</span>(递归终点)  <span class="comment">//根据限制条件求递归终点</span></span><br><span class="line">          返回</span><br><span class="line">      <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">      	<span class="keyword">for</span>(可走到的子结点) <span class="comment">//超出限制条件的子结点忽略掉</span></span><br><span class="line">              ans += <span class="built_in">dfs</span>(子结点)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> dp[condition1][condition2]....=ans;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题-2"><a href="#例题-2" class="headerlink" title="例题"></a>例题</h3><h4 id="1、牛走草地"><a href="#1、牛走草地" class="headerlink" title="1、牛走草地"></a>1、牛走草地</h4><h5 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h5><p>N*M 的地图，#代表树，不可走，*代表草，可以走，走一次花费 1 时间，求从 x1，y1 走到 x2，y2 花费时间小于等于 t 的方案数</p>
+<h5 id="代码逻辑-3"><a href="#代码逻辑-3" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>dfs 中三个参数表示当下坐标和来到此处已经花费的时间</li>
+<li>限制条件是时间，时间达到了 T 必然不用接着尝试走下去了，如果到了终点，也可以走出终点再走回去，所以递归终点条件和有无到达终点无关</li>
+<li>只有不超出地图边界的子结点需要被考虑</li>
+</ul>
+<h5 id="核心代码-2"><a href="#核心代码-2" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> time)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dp[x][y][time]!=<span class="number">-1</span>)</span><br><span class="line">		<span class="keyword">return</span> dp[x][y][time];</span><br><span class="line">	<span class="keyword">if</span>(time==T)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(x==x_end&amp;&amp;y==y_end)</span><br><span class="line">			<span class="keyword">return</span> ans[x][y][time]=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> ans[x][y][time]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> result=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> nx=x+dx[i];</span><br><span class="line">		<span class="type">int</span> ny=y+dy[i];</span><br><span class="line">		<span class="keyword">if</span>(nx&lt;<span class="number">1</span>||nx&gt;N||ny&lt;<span class="number">1</span>||ny&gt;M||mp[nx][ny]==<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		result += <span class="built_in">dfs</span>(nx,ny,time<span class="number">+1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dp[x][y][time]=result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、地宫取宝"><a href="#2、地宫取宝" class="headerlink" title="2、地宫取宝"></a>2、地宫取宝</h4><h5 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h5><p>n*m 的地图从左上入，右下出，只能向右或者向下走。如果一件宝物大于手上宝物最大价值，那就选择拿它，当然也可以不拿，求抵达终点时手上恰好 k 件宝物的方案数</p>
+<h5 id="代码逻辑-4"><a href="#代码逻辑-4" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>dfs 四个参数表示当下坐标和手上已有宝物的最大价值和手上已有宝物的数量</li>
+<li>限制条件是宝物数量和终点限制，由于只能向右或向下，无法走回头路，所以到了终点必须停下，但是如果已经拿了 k 个物品，后面可以一路都不拿，所以物品限制不作为递归终点的判据</li>
+<li>只有不超出地图终点的子结点需要考虑，如果选择拿当下物品，到子结点时已经拿过的物品达到 num+1，只有 num+1&lt;&#x3D;k 的子结点需要考虑</li>
+</ul>
+<h5 id="核心代码-3"><a href="#核心代码-3" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> maxV, <span class="type">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(dp[x][y][maxV][num] != <span class="number">-1</span>)</span><br><span class="line">	    <span class="keyword">return</span> dp[x][y][maxV][num];</span><br><span class="line">	<span class="keyword">if</span>(x==n&amp;&amp;y==m)</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">if</span>(num==k || num==(k<span class="number">-1</span>) &amp;&amp; maxV&lt;Map[x][y] )</span><br><span class="line">	        <span class="keyword">return</span> dp[x][y][maxV][num]=<span class="number">1</span>;</span><br><span class="line">	    <span class="keyword">else</span></span><br><span class="line">	        <span class="keyword">return</span> dp[x][y][maxV][num]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(x<span class="number">+1</span>&lt;=n)</span><br><span class="line">	    ans += <span class="built_in">dfs</span>(x<span class="number">+1</span>,y,maxV,num);</span><br><span class="line">	<span class="keyword">if</span>(y<span class="number">+1</span>&lt;=m)</span><br><span class="line">	    ans += <span class="built_in">dfs</span>(x,y<span class="number">+1</span>,maxV,num);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(Map[x][y]&gt;maxV &amp;&amp; x<span class="number">+1</span>&lt;=n &amp;&amp; num&lt;k)</span><br><span class="line">		ans += <span class="built_in">dfs</span>(x<span class="number">+1</span>,y,Map[x][y],num<span class="number">+1</span>);</span><br><span class="line">	<span class="keyword">if</span>(Map[x][y]&gt;maxV &amp;&amp; y<span class="number">+1</span>&lt;=m &amp;&amp; num&lt;k)</span><br><span class="line">		ans += <span class="built_in">dfs</span>(x,y<span class="number">+1</span>,Map[x][y],num<span class="number">+1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> dp[x][y][maxV][num] = ans ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.countingstars.cc/2024/09/03/%E6%90%9C%E7%B4%A2/" data-id="cm0mj4wyt0000b8to1jgpf2bw" data-title="搜索" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%89%88%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">动态规划（资源优化版）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/03/%E6%90%9C%E7%B4%A2/">搜索</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%89%88%EF%BC%89/">动态规划（资源优化版）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%9B%BE%E8%AE%BA/">图论</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%AD%90%E9%97%AE%E9%A2%98%E6%9C%80%E4%BC%98%E8%A7%A3%E9%80%92%E6%8E%A8%EF%BC%89/">动态规划（子问题最优解递推）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Lios<br />
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
