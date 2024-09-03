@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>数据结构 | countingstars</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="单调栈特点单调表示从起点开始单调，遇到破坏单调性的元素时，会去掉栈内的元素来保持单调。以单增栈为例，如果处理了原数组 1 到 n 号元素，那么栈内第一个元素必然是 1 到 n 之间最小的元素，第二个元素必然是 1 到 n 之间第二小的元素，但是无法保证栈的长度等于 n 例题1、海报问题描述N 个矩形房子拍成一排，高度分别是 hi用海报盖住它们，海报所盖之处不能是天空，最少用几张海报？ 代码逻辑 先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构">
+<meta property="og:url" content="https://blog.countingstars.cc/2024/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="countingstars">
+<meta property="og:description" content="单调栈特点单调表示从起点开始单调，遇到破坏单调性的元素时，会去掉栈内的元素来保持单调。以单增栈为例，如果处理了原数组 1 到 n 号元素，那么栈内第一个元素必然是 1 到 n 之间最小的元素，第二个元素必然是 1 到 n 之间第二小的元素，但是无法保证栈的长度等于 n 例题1、海报问题描述N 个矩形房子拍成一排，高度分别是 hi用海报盖住它们，海报所盖之处不能是天空，最少用几张海报？ 代码逻辑 先">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-03T13:29:10.000Z">
+<meta property="article:modified_time" content="2024-09-03T13:29:23.778Z">
+<meta property="article:author" content="Lios">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="countingstars" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">countingstars</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.countingstars.cc"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-数据结构" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="article-date">
+  <time class="dt-published" datetime="2024-09-03T13:29:10.000Z" itemprop="datePublished">2024-09-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      数据结构
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>单调表示从起点开始单调，遇到破坏单调性的元素时，会去掉栈内的元素来保持单调。以单增栈为例，如果处理了原数组 1 到 n 号元素，那么栈内第一个元素必然是 1 到 n 之间最小的元素，第二个元素必然是 1 到 n 之间第二小的元素，但是无法保证栈的长度等于 n</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="1、海报"><a href="#1、海报" class="headerlink" title="1、海报"></a>1、海报</h4><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p>N 个矩形房子拍成一排，高度分别是 h<del>i</del>用海报盖住它们，海报所盖之处不能是天空，最少用几张海报？</p>
+<h5 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>先假设答案为 N，如果两个房子同高，且它们之间的房子都比它们高，那么答案就可以减 1</li>
+</ul>
+<h5 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cin&gt;&gt;N&gt;&gt;h;</span><br><span class="line">s.<span class="built_in">push</span>(h);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=N;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       cin&gt;&gt;h;</span><br><span class="line">       <span class="keyword">while</span>( !s.<span class="built_in">empty</span>() &amp;&amp; h &lt; s.<span class="built_in">top</span>() )</span><br><span class="line">           s.<span class="built_in">pop</span>();</span><br><span class="line">       <span class="keyword">if</span>( !s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">top</span>()==h )</span><br><span class="line">           ans--;</span><br><span class="line">      	s.<span class="built_in">push</span>(h);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h2><h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><p>单调表示从起点开始单调，遇到破坏单调性的元素时，会去掉队列内的元素来保持单调。以单增队列为例，如果处理了原数组 1 到 n 号元素，那么队列内第一个元素必然是 1 到 n 之间最小的元素，第二个元素必然是 1 到 n 之间第二小的元素，但是无法保证队列的长度等于 n</p>
+<h3 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h3><h4 id="1、k-区间最大极值差"><a href="#1、k-区间最大极值差" class="headerlink" title="1、k 区间最大极值差"></a>1、k 区间最大极值差</h4><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>有 N 个数字，F<del>i</del>表示区间[max(1,i-k),i]之间的最大值与最小值的差，求 F<del>i</del>的最大值</p>
+<h5 id="代码逻辑-1"><a href="#代码逻辑-1" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>维护一个单增队列和一个单减队列求极值差</li>
+<li>由于 1-2、1-3….1-k 的最大极值差必然是 1-k 的极值差，求出原数组 1-k 之间的极值差，以代表 i&lt;&#x3D;k 时的答案</li>
+<li>i&gt;k 时，每次将 k 区间右移一位，最左边的元素被移出，在队列中删去它</li>
+</ul>
+<h5 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;deque&gt;</span></span></span><br><span class="line">........</span><br><span class="line">    <span class="comment">//先处理1-k区间的极值差</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>( !dq<span class="number">1.</span><span class="built_in">empty</span>() &amp;&amp; data[i]&lt;dq<span class="number">1.</span><span class="built_in">back</span>() )</span><br><span class="line">            dq<span class="number">1.</span><span class="built_in">pop_back</span>();</span><br><span class="line">        dq<span class="number">1.</span><span class="built_in">push_back</span>(data[i]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>( !dq<span class="number">2.</span><span class="built_in">empty</span>() &amp;&amp; data[i]&gt;dq<span class="number">2.</span><span class="built_in">back</span>() )</span><br><span class="line">            dq<span class="number">2.</span><span class="built_in">pop_back</span>();</span><br><span class="line">       	dq<span class="number">2.</span><span class="built_in">push_back</span>(data[i]);</span><br><span class="line">    &#125;</span><br><span class="line">	ans = dq<span class="number">2.f</span>ront() - dq<span class="number">1.f</span>ront();</span><br><span class="line">	<span class="comment">//处理后面的k区间</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=k<span class="number">+1</span>;i&lt;=n-k<span class="number">+1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">     	<span class="keyword">while</span>( !dq<span class="number">1.</span><span class="built_in">empty</span>() &amp;&amp; data[i]&lt;dq<span class="number">1.</span><span class="built_in">back</span>() )</span><br><span class="line">            dq<span class="number">1.</span><span class="built_in">pop_back</span>();</span><br><span class="line">       	dq<span class="number">1.</span><span class="built_in">push_back</span>(data[i]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>( !dq<span class="number">2.</span><span class="built_in">empty</span>() &amp;&amp; data[i]&gt;dq<span class="number">2.</span><span class="built_in">back</span>() )</span><br><span class="line">            dq<span class="number">2.</span><span class="built_in">pop_back</span>();</span><br><span class="line">       	dq<span class="number">2.</span><span class="built_in">push_bac</span>(data[i]);</span><br><span class="line">        <span class="comment">//处理被移出去的元素</span></span><br><span class="line">        <span class="keyword">if</span>(dq<span class="number">1.f</span>ront()==data[i-k])</span><br><span class="line">            dq<span class="number">1.</span><span class="built_in">pop_front</span>();</span><br><span class="line">        <span class="keyword">if</span>(dq<span class="number">2.f</span>ront()==data[i-k])</span><br><span class="line">            dq<span class="number">2.</span><span class="built_in">pop_front</span>();</span><br><span class="line">        ans = <span class="built_in">max</span>(ans,dq<span class="number">2.f</span>ront()-dq<span class="number">1.f</span>ront());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li><p>c++的 map 库中提供了数据类型 map，实现键值对的映射</p>
+</li>
+<li><p>map 会自动按照 first 第一，second 其次的优先级来排序</p>
+</li>
+</ul>
+<h3 id="例题-2"><a href="#例题-2" class="headerlink" title="例题"></a>例题</h3><h4 id="1、点赞日志"><a href="#1、点赞日志" class="headerlink" title="1、点赞日志"></a>1、点赞日志</h4><h5 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h5><p>有 N 条点赞记录，每条记录包含被点赞内容的编号 id 和点赞时间 ts，如果存在 T，使得[T,T+D)之间 id 被赞的次数大于 k，那么就输出 id</p>
+<h5 id="代码逻辑-2"><a href="#代码逻辑-2" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>用键值对&lt; id,vector&lt;int&gt; &gt;记录数据即可</li>
+</ul>
+<h5 id="核心代码-2"><a href="#核心代码-2" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">map&lt; string, vector&lt;<span class="type">int</span>&gt; &gt; mp;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=N;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       cin&gt;&gt;id&gt;&gt;ts;</span><br><span class="line">       mp[id].<span class="built_in">push</span>(ts);</span><br><span class="line">   &#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> ver : mp)</span><br><span class="line">   &#123;</span><br><span class="line">    	vector&lt;<span class="type">int</span>&gt; temp = mp.second;</span><br><span class="line">       <span class="keyword">if</span>(temp.<span class="built_in">size</span>()&lt;k)</span><br><span class="line">           <span class="keyword">continue</span>;</span><br><span class="line">       <span class="built_in">sort</span>(temp.<span class="built_in">begin</span>(),temp.<span class="built_in">end</span>());</span><br><span class="line">       <span class="comment">//枚举点赞记录时间起点，如果可以找到大于等于k条满足条件的点赞记录，就输出id</span></span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=temp.<span class="built_in">size</span>()-k<span class="number">+1</span>;i++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="type">int</span> ans = <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">for</span>(<span class="type">int</span> j=i<span class="number">+1</span>;j&lt;=i+k;j++)</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">if</span>(temp[j]-temp[i]&lt;D)</span><br><span class="line">                   ans++;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span>(ans&gt;=k)</span><br><span class="line">           &#123;</span><br><span class="line">               cout&lt;&lt;ver.first&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>将祖先结点相同的结点放入同一个集合</p>
+<h3 id="路径压缩算法"><a href="#路径压缩算法" class="headerlink" title="路径压缩算法"></a>路径压缩算法</h3><ul>
+<li>如果每次找结点的祖先结点都一个个父节点向上回溯，就多做了很多次不必要的操作</li>
+<li>路径压缩算法每回溯一次都把结点的父结点赋值为父结点的父结点，这样下次调用的时候就不用再做已经做过的回溯</li>
+</ul>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">FindRoot</span><span class="params">(<span class="type">int</span> index)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> root[index]==index ? index : ( root[index] = <span class="built_in">FindRoot</span>(root[index]) );</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题-3"><a href="#例题-3" class="headerlink" title="例题"></a>例题</h3><h4 id="1、奶酪"><a href="#1、奶酪" class="headerlink" title="1、奶酪"></a>1、奶酪</h4><h5 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h5><p>奶酪高度 h，有 n 个半径 r 的洞(坐标 x<del>i</del>,y<del>i</del>)，上表面视作高度 h，下表面视作高度 0，是否存在一条路径贯穿上下表面</p>
+<h5 id="代码逻辑-3"><a href="#代码逻辑-3" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>枚举与上下表面联通的洞，如果能找到一对洞分别与上表面和下表面联通且它们有公共祖先结点，那么输出”YES”，否则输出”NO”</li>
+</ul>
+<h5 id="核心代码-3"><a href="#核心代码-3" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">   	cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">       <span class="keyword">if</span>(<span class="built_in">is_up</span>())</span><br><span class="line">        	up.<span class="built_in">push_back</span>(x,y);</span><br><span class="line">      	<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">is_down</span>())</span><br><span class="line">           down.<span class="built_in">push_back</span>(x,y);</span><br><span class="line">       all[i] = &#123;x,y&#125;;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;i;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span>(<span class="built_in">connected</span>())</span><br><span class="line">           &#123;</span><br><span class="line">               root1 = <span class="built_in">FindRoot</span>(i), root2 = <span class="built_in">FindRoot</span>(j);</span><br><span class="line">               <span class="keyword">if</span>(root1!=root2)</span><br><span class="line">            <span class="comment">//直接修改祖先结点的祖先结点，表示两个并查集的合并</span></span><br><span class="line">                   root[root1] = root[root2];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、关押犯人"><a href="#2、关押犯人" class="headerlink" title="2、关押犯人"></a>2、关押犯人</h4><h5 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h5><p>两个监狱关押 N 个犯人，有 M 对仇恨值，仇恨对象在同一监狱就会爆发等同于仇恨值的冲突，合理放置犯人使最大的冲突值最小</p>
+<h5 id="代码逻辑-4"><a href="#代码逻辑-4" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>仇恨值从大到小排列，优先规避大仇恨值，第一个无法规避的仇恨值就是实际爆发的冲突中的最大值，由于可能的更大值已经被规避，所以实际的最大冲突值就是最大冲突值的最小值</li>
+<li>规避仇恨的方法就是把仇恨的对象的所有敌人都放入同一个监狱，也就是同一个集合</li>
+</ul>
+<h5 id="核心代码-4"><a href="#核心代码-4" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//表示仇恨对象和仇恨值</span></span><br><span class="line">    <span class="type">int</span> x,y,c;</span><br><span class="line">&#125;data[maxn];</span><br><span class="line"><span class="type">int</span> enemy[maxn]; <span class="comment">//表示犯人的第一个仇人</span></span><br><span class="line">..................</span><br><span class="line">    <span class="built_in">sort</span>(data,data+m,[](node n1,node n2)&#123;<span class="keyword">return</span> n<span class="number">1.</span>c &gt; n<span class="number">2.</span>c;&#125;);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( <span class="built_in">FindRoot</span>(data[i].x) == <span class="built_in">FindRoot</span>(data[i].y) ) <span class="comment">//找到第一对无法避免的冲突</span></span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;data[i].c;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(enemy[data[i].x]==<span class="number">0</span>) <span class="comment">//输入第一个敌人</span></span><br><span class="line">            enemy[data[i].x] = data[i].y;</span><br><span class="line">        <span class="keyword">else</span>  <span class="comment">//已经有第一个敌人</span></span><br><span class="line">            root[<span class="built_in">FindRoot</span>(enemy[data[i].x])] = root[<span class="built_in">FindRoot</span>(data[i].y)];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(enemy[data[i].y]==<span class="number">0</span>)</span><br><span class="line">            enemy[data[i].y] = data[i].x;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            root[<span class="built_in">FindRoot</span>(enemy[data[i].y])] = root[<span class="built_in">FindRoot</span>(data[i].x)];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ST-表"><a href="#ST-表" class="headerlink" title="ST 表"></a>ST 表</h2><h3 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h3><p><strong>ST 表</strong>可以实现离线查询区间最值的功能</p>
+<h3 id="代码逻辑-5"><a href="#代码逻辑-5" class="headerlink" title="代码逻辑"></a>代码逻辑</h3><ul>
+<li><strong>ST 表</strong>把区间划分为长度为 2 的幂次的子区间，st<del>ij</del>表示原数组从 i 到 i+$$2^j-1$$的最值</li>
+<li>求任意区间最值时，只需把区间划分为两个长度为 2 的幂次的子区间，查 st 表得最值</li>
+<li>任意区间划分原则：长度对半分，断点 k&#x3D;$$log_2{(R-L+1)}$$</li>
+</ul>
+<h3 id="核心代码-生成-ST-表"><a href="#核心代码-生成-ST-表" class="headerlink" title="核心代码_生成 ST 表"></a>核心代码_生成 ST 表</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=maxj;j++)  <span class="comment">//区间长度为2^j,区间长度大的st值由更小的区间得到</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)  <span class="comment">//区间起点为i，起点小的st值需要依赖起点大的st值获得</span></span><br><span class="line">           st[i][j] = <span class="built_in">max</span>( st[i][j<span class="number">-1</span>], st[i+(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>] );</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-任意区间查值"><a href="#核心代码-任意区间查值" class="headerlink" title="核心代码_任意区间查值"></a>核心代码_任意区间查值</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> L,<span class="type">int</span> R)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="type">int</span> k = <span class="built_in">log</span>(R-L<span class="number">+1</span>) / <span class="built_in">log</span>(<span class="number">2</span>);</span><br><span class="line">       <span class="comment">//确保区间被划分为两个长为2^k的区间，所以后一个区间的左端点不是L+(1&lt;&lt;k)</span></span><br><span class="line">       <span class="comment">//又为了确保后一个区间的左端点小于等于前一个区间的右端点，计算求得k的值log(R-L+1) / log(2)</span></span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">max</span>(st[L][k],st[R-(<span class="number">1</span>&lt;&lt;k)<span class="number">+1</span>][k]);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><h3 id="概述-3"><a href="#概述-3" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>树状数组是对原数组更快速的管理方式，普通树状数组可用于单点修改和区间查询，如果引入差分数组就可以实现区间修改、单点查询、区间和查询，这里所有的修改和查询都指对原数组的操作。</li>
+<li>普通树状数组是管理原数组的工具</li>
+<li>差分树状数组是管理差分数组从而管理原数组的工具</li>
+<li>树状数组大小和原数组一样</li>
+</ul>
+<h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><ul>
+<li><p><strong>lowbit(x)：</strong>x 二进制表示中最低位 1 代表的数字，lowbit(x) &#x3D; x&amp;(~x+1)</p>
+</li>
+<li><p><strong>差分数组：</strong>差分数组 data_diff<del>i</del> &#x3D; data<del>i</del>-data<del>i-1</del></p>
+</li>
+</ul>
+<h3 id="代码逻辑-6"><a href="#代码逻辑-6" class="headerlink" title="代码逻辑"></a>代码逻辑</h3><ul>
+<li>树状数组中下标为 x 的节点的父节点为下标为 x+lowbit(x)的节点</li>
+<li>每一个节点存的数据是本身数据以及本身的子节点数据的和</li>
+<li>求原数组下标 1-x 的和是从树状数组下标为 x 的节点开始加，每次下标减去 lowbit(x)</li>
+</ul>
+<h3 id="核心代码-创建树状数组-单点修改"><a href="#核心代码-创建树状数组-单点修改" class="headerlink" title="核心代码_创建树状数组&#x2F;单点修改"></a>核心代码_创建树状数组&#x2F;单点修改</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建树状数组的过程相当于做单点修改,原数组下标为i的值从0修改为输入的data[i]</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> index,<span class="type">int</span> value)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=index;i&lt;=n;i+=<span class="built_in">lowbit</span>(i)) <span class="comment">//回溯每一个父节点</span></span><br><span class="line">			data_tree[i] += value;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-区间和查询"><a href="#核心代码-区间和查询" class="headerlink" title="核心代码_区间和查询"></a>核心代码_区间和查询</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> L,<span class="type">int</span> R)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">     	<span class="keyword">for</span>(<span class="type">int</span> i=R;i&gt;=<span class="number">1</span>;i-=<span class="built_in">lowbit</span>(i))</span><br><span class="line">           ans += data_tree[i];</span><br><span class="line">       <span class="keyword">if</span>(L==<span class="number">1</span>)</span><br><span class="line">           <span class="keyword">return</span> ans;</span><br><span class="line">      	<span class="keyword">for</span>(<span class="type">int</span> i=L<span class="number">-1</span>;i&gt;=<span class="number">1</span>;i-=<span class="built_in">lowbit</span>(i))</span><br><span class="line">           ans -= data_tree[i];</span><br><span class="line">      	<span class="keyword">return</span> ans;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-差分数组创建树状数组-单点修改"><a href="#核心代码-差分数组创建树状数组-单点修改" class="headerlink" title="核心代码_差分数组创建树状数组&#x2F;单点修改"></a>核心代码_差分数组创建树状数组&#x2F;单点修改</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建树状数组的过程相当于做单点修改,原数组下标为i的值从0修改为输入的data[i]</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;data[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=i;j&lt;=n;j+=<span class="built_in">lowbit</span>(j))</span><br><span class="line">            data_tree[j] = data[i] - data[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-差分树状数组单点查询"><a href="#核心代码-差分树状数组单点查询" class="headerlink" title="核心代码_差分树状数组单点查询"></a>核心代码_差分树状数组单点查询</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询的是差分数组的1-index的和，也就是原数组的单点值</span></span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> index)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">      	<span class="keyword">for</span>(<span class="type">int</span> i=index;i&gt;=<span class="number">1</span>;i-=<span class="built_in">lowbit</span>(i))</span><br><span class="line">            ans += data_tree[i];</span><br><span class="line">       	<span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-差分树状数组区间修改"><a href="#核心代码-差分树状数组区间修改" class="headerlink" title="核心代码_差分树状数组区间修改"></a>核心代码_差分树状数组区间修改</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原数组在区间改值，相当于差分数组在left处+k，在right+1处-k，反映到树状数组就是做两次单点修改</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">change</span><span class="params">(<span class="type">int</span> left,<span class="type">int</span> right,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=left;i&lt;=n;i+=<span class="built_in">lowbit</span>(i))</span><br><span class="line">            data_tree[i] += k;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=right<span class="number">+1</span>;i&lt;=n;i+=<span class="built_in">lowbit</span>(i))</span><br><span class="line">            data_tree[i] = -k;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="求和线段树"><a href="#求和线段树" class="headerlink" title="求和线段树"></a>求和线段树</h2><h3 id="概述-4"><a href="#概述-4" class="headerlink" title="概述"></a>概述</h3><p><strong>求和线段树</strong>可完成区间修改（加法和乘法）和区间和查询的功能，需要的空间是原数组的 4 倍</p>
+<h3 id="代码逻辑-7"><a href="#代码逻辑-7" class="headerlink" title="代码逻辑"></a>代码逻辑</h3><ul>
+<li>pos 表示树上结点，low-hight 表示 pos 结点树控制的原数组的位置</li>
+<li>利用 tag 数组延迟完成改值操作，减少修改操作的次数，tag 的值只有 pos 的子结点才会用到</li>
+<li>x、y、k 是输入的参数，分别表示操作的区间[x,y]以及操作数 k</li>
+<li>每次调用 add 或者 mul 时，最终终止的地方，其父结点全都会被及时处理，其子结点会延迟处理，而每一次调用 add、mul、query 都是从 pos&#x3D;1 开始的，所以 tree[1]的值总是正确的。如果一进 query 就返回了，那么输出的结果是 tree[pos]，不然就会先 pushdown 把子结点的值修改正确再调用 query 查询子结点，因此查询值总是正确的。</li>
+</ul>
+<h3 id="核心代码-建树"><a href="#核心代码-建树" class="headerlink" title="核心代码_建树"></a>核心代码_建树</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> pos, <span class="type">int</span> low , <span class="type">int</span> hight)</span>  <span class="comment">//递归建树</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(low == hight)</span><br><span class="line">	&#123;</span><br><span class="line">		tree[pos] = data[low];</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> mid = low + ( (hight - low) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">	<span class="built_in">build</span>(pos&lt;&lt;<span class="number">1</span>, low, mid);</span><br><span class="line">	<span class="built_in">build</span>( (pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>, mid<span class="number">+1</span>, hight);</span><br><span class="line">	tree[pos] = tree[pos&lt;&lt;<span class="number">1</span>] + tree[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-向下传标记（tag）"><a href="#核心代码-向下传标记（tag）" class="headerlink" title="核心代码_向下传标记（tag）"></a>核心代码_向下传标记（tag）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushdown</span><span class="params">(<span class="type">int</span> pos, <span class="type">int</span> low, <span class="type">int</span> hight)</span>  <span class="comment">//向下改值</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> mid = low + ( ( hight - low) &gt;&gt; <span class="number">1</span> );</span><br><span class="line">	<span class="comment">//修改子结点的值,乘法优先</span></span><br><span class="line">	tree[pos&lt;&lt;<span class="number">1</span>] =  tree[pos&lt;&lt;<span class="number">1</span>] * tag_mul[pos]  + ( mid - low + <span class="number">1</span> ) * tag_add[pos];</span><br><span class="line">	tree[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>] =  tree[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>] * tag_mul[pos] + ( hight - mid ) * tag_add[pos];</span><br><span class="line">	<span class="comment">//修改子结点的tag,乘法优先</span></span><br><span class="line">	tag_mul[pos&lt;&lt;<span class="number">1</span>] = tag_mul[pos&lt;&lt;<span class="number">1</span>] * tag_mul[pos];</span><br><span class="line">	tag_mul[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>] = tag_mul[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>] * tag_mul[pos];</span><br><span class="line">	tag_add[pos&lt;&lt;<span class="number">1</span>] = tag_add[pos&lt;&lt;<span class="number">1</span>] * tag_mul[pos] + tag_add[pos];</span><br><span class="line">	tag_add[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>] = tag_add[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>] * tag_mul[pos] + tag_add[pos];</span><br><span class="line">	<span class="comment">//复原当下结点的tag</span></span><br><span class="line">	tag_mul[pos] = <span class="number">1</span>;</span><br><span class="line">	tag_add[pos] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-区间改值（加法）"><a href="#核心代码-区间改值（加法）" class="headerlink" title="核心代码_区间改值（加法）"></a>核心代码_区间改值（加法）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> pos, <span class="type">int</span> low, <span class="type">int</span> hight)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=low &amp;&amp; y&gt;=hight) <span class="comment">//这个结点控制的区间已经被完全覆盖</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//修改当下位置树的值并设置tag</span></span><br><span class="line">		tree[pos] = tree[pos] +  ( hight - low + <span class="number">1</span>) * k;</span><br><span class="line">		tag_add[pos] = tag_add[pos] + k;</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">pushdown</span>(pos, low, hight); <span class="comment">//递归结束后做回溯的时候及时传递tag标记</span></span><br><span class="line">	<span class="type">int</span> mid = low +  ( ( hight - low ) &gt;&gt; <span class="number">1</span> );</span><br><span class="line">	<span class="comment">//如果左右子结点控制的区间有被影响到，那么就对它们调用add函数</span></span><br><span class="line">	<span class="keyword">if</span>(x&lt;=mid)</span><br><span class="line">		<span class="built_in">add</span>(pos&lt;&lt;<span class="number">1</span>, low, mid);</span><br><span class="line">	<span class="keyword">if</span>(y&gt;=mid<span class="number">+1</span>)</span><br><span class="line">		<span class="built_in">add</span>( (pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>, mid<span class="number">+1</span>, hight);</span><br><span class="line">	<span class="comment">//改完左右结点后，给当下结点重新赋值</span></span><br><span class="line">	tree[pos] = tree[pos&lt;&lt;<span class="number">1</span>] + tree[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-区间改值（乘法）"><a href="#核心代码-区间改值（乘法）" class="headerlink" title="核心代码_区间改值（乘法）"></a>核心代码_区间改值（乘法）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">mul</span><span class="params">(<span class="type">int</span> pos, <span class="type">int</span> low, <span class="type">int</span> hight)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=low &amp;&amp; y&gt;=hight)</span><br><span class="line">	&#123;</span><br><span class="line">		tree[pos] = tree[pos] * k;</span><br><span class="line">		tag_mul[pos] = tag_mul[pos] * k;</span><br><span class="line">		tag_add[pos] = tag_add[pos] * k; <span class="comment">//注意：做乘法操作的时候会影响前面遗留的加法</span></span><br><span class="line">		<span class="keyword">return</span>	;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">pushdown</span>(pos, low, hight);</span><br><span class="line">	<span class="type">int</span> mid = low + ( ( hight - low ) &gt;&gt; <span class="number">1</span> );</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=mid)</span><br><span class="line">		<span class="built_in">mul</span>( pos&lt;&lt;<span class="number">1</span>, low, mid);</span><br><span class="line">	<span class="keyword">if</span>(y&gt;=mid<span class="number">+1</span>)</span><br><span class="line">		<span class="built_in">mul</span>( (pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>, mid<span class="number">+1</span>, hight);</span><br><span class="line">	tree[pos] = tree[pos&lt;&lt;<span class="number">1</span>] + tree[(pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心代码-区间和查询-1"><a href="#核心代码-区间和查询-1" class="headerlink" title="核心代码_区间和查询"></a>核心代码_区间和查询</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> pos, <span class="type">int</span> low, <span class="type">int</span> hight)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=low &amp;&amp; y&gt;=hight)</span><br><span class="line">		<span class="keyword">return</span> tree[pos];</span><br><span class="line">	<span class="built_in">pushdown</span>(pos,low,hight);</span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>, mid = low + ( ( hight - low ) &gt;&gt; <span class="number">1</span> );</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=mid)</span><br><span class="line">		ans += <span class="built_in">query</span>(pos&lt;&lt;<span class="number">1</span>, low, mid);</span><br><span class="line">	<span class="keyword">if</span>(y&gt;=mid<span class="number">+1</span>)</span><br><span class="line">		ans += <span class="built_in">query</span>( (pos&lt;&lt;<span class="number">1</span>)<span class="number">+1</span>, mid<span class="number">+1</span>, hight );</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字典树"><a href="#字典树" class="headerlink" title="字典树"></a>字典树</h2><h3 id="概述-5"><a href="#概述-5" class="headerlink" title="概述"></a>概述</h3><p><strong>字典树</strong>对前缀进行复用，查找时可以省时间</p>
+<h3 id="代码逻辑-8"><a href="#代码逻辑-8" class="headerlink" title="代码逻辑"></a>代码逻辑</h3><ul>
+<li>二维数组存三个信息，第一维存起始结点，数据存终止结点，第二维存这两个结点之间的值</li>
+</ul>
+<h3 id="例题-4"><a href="#例题-4" class="headerlink" title="例题"></a>例题</h3><h4 id="1、字符串前缀"><a href="#1、字符串前缀" class="headerlink" title="1、字符串前缀"></a>1、字符串前缀</h4><h5 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h5><p>有 n 个文本串和 m 个模式串，求出各匹配串在文本串的前缀中出现的次数</p>
+<h5 id="核心代码-插入字符串"><a href="#核心代码-插入字符串" class="headerlink" title="核心代码_插入字符串"></a>核心代码_插入字符串</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Insert</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="type">int</span> x = <span class="number">1</span>;  <span class="comment">//从字典树起点开始</span></span><br><span class="line">      	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;s.<span class="built_in">length</span>();i++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span>(!trie[x][s[i]-<span class="string">&#x27;a&#x27;</span>])</span><br><span class="line">               trie[x][s[i]-<span class="string">&#x27;a&#x27;</span>] = ind++; <span class="comment">//字典树数组的栈顶指针</span></span><br><span class="line">           x = trie[x][s[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="核心代码-查询字符串"><a href="#核心代码-查询字符串" class="headerlink" title="核心代码_查询字符串"></a>核心代码_查询字符串</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;s.<span class="built_in">length</span>();i++)</span><br><span class="line">       &#123;</span><br><span class="line">           x = trie[x][s[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">           <span class="keyword">if</span>(x==<span class="number">0</span>) <span class="comment">//匹配到某个字符时，字典树中无对应的边，说明失配</span></span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> x;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、异或最大值"><a href="#2、异或最大值" class="headerlink" title="2、异或最大值"></a>2、异或最大值</h4><h5 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h5><p>有 n 个数字，可以任意两两组合做异或，求出可得的最大值</p>
+<h5 id="代码逻辑-9"><a href="#代码逻辑-9" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>对每个数字，找到和它和其他数字异或的最大结果，再利用各自的最大值求得总最大值即可</li>
+<li>字典树寻找异或结果最大值：利用二进制编码构造 01 字典树，利用贪心思想，每一步都选择和自己对应数位相反的结点</li>
+<li>字典树建立：为了统一，所有 int 数都看成 31 位二进制，只忽略了符号位的 0</li>
+</ul>
+<h5 id="核心代码-建树-1"><a href="#核心代码-建树-1" class="headerlink" title="核心代码_建树"></a>核心代码_建树</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Insert</span><span class="params">(<span class="type">int</span> data)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">30</span>;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">       &#123;</span><br><span class="line">    		<span class="keyword">if</span>(!trie[x][ (data&gt;&gt;j)&amp;<span class="number">1</span> ])</span><br><span class="line">               trie[x][ (data&gt;&gt;j)&amp;<span class="number">1</span> ] = ind++; <span class="comment">//字典树数组的栈顶指针</span></span><br><span class="line">          	x = trie[x][ (data&gt;&gt;j)&amp;<span class="number">1</span> ]</span><br><span class="line">       &#125;</span><br><span class="line">       val[x] = data;  <span class="comment">//十进制值与字典树终点建立映射关系，方便查询</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="核心代码-寻找异或最大值"><a href="#核心代码-寻找异或最大值" class="headerlink" title="核心代码_寻找异或最大值"></a>核心代码_寻找异或最大值</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">maxEXOR</span><span class="params">(<span class="type">int</span> data)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">30</span>;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="comment">//优先选择和自己对应数位数字不同的路径</span></span><br><span class="line">           <span class="keyword">if</span>(trie[x][ !( (data&gt;&gt;j)&amp;<span class="number">1</span> ) ])</span><br><span class="line">               x = trie[x][ !( (data&gt;&gt;j)&amp;<span class="number">1</span> ) ];</span><br><span class="line">           <span class="keyword">else</span></span><br><span class="line">               x = trie[x][ (data&gt;&gt;j)&amp;<span class="number">1</span> ];</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> data ^ val[x];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.countingstars.cc/2024/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="cm0mgvkgh0002j9to9g77fvrd" data-title="数据结构" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          动态规划
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/09/03/Manacher%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Manacher算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/03/%E5%9B%BE%E8%AE%BA/">图论</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/Manacher%E7%AE%97%E6%B3%95/">Manacher算法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/">模式匹配算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Lios<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

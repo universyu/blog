@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>图论 | countingstars</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="二叉树例题1、已知中、后序遍历求先序代码逻辑 后序遍历的最后一个字符一定是当下二叉树的根结点，先序遍历中根节点首先被遍历，所以每找到一个根节点就输出。在中序遍历中，根结点前面的是左子树，后面的是右子树，根据后序遍历的最后一个字符可以确定根，从而根据中序遍历确定左子树，从而根据左子树的大小从后序遍历中取出左子树，然后递归求解子树，右子树同理用递归求解  核心代码123456789void forw(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图论">
+<meta property="og:url" content="https://blog.countingstars.cc/2024/09/03/%E5%9B%BE%E8%AE%BA/index.html">
+<meta property="og:site_name" content="countingstars">
+<meta property="og:description" content="二叉树例题1、已知中、后序遍历求先序代码逻辑 后序遍历的最后一个字符一定是当下二叉树的根结点，先序遍历中根节点首先被遍历，所以每找到一个根节点就输出。在中序遍历中，根结点前面的是左子树，后面的是右子树，根据后序遍历的最后一个字符可以确定根，从而根据中序遍历确定左子树，从而根据左子树的大小从后序遍历中取出左子树，然后递归求解子树，右子树同理用递归求解  核心代码123456789void forw(">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-03T13:31:27.000Z">
+<meta property="article:modified_time" content="2024-09-03T13:31:37.588Z">
+<meta property="article:author" content="Lios">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="countingstars" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">countingstars</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.countingstars.cc"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-图论" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/03/%E5%9B%BE%E8%AE%BA/" class="article-date">
+  <time class="dt-published" datetime="2024-09-03T13:31:27.000Z" itemprop="datePublished">2024-09-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      图论
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="1、已知中、后序遍历求先序"><a href="#1、已知中、后序遍历求先序" class="headerlink" title="1、已知中、后序遍历求先序"></a>1、已知中、后序遍历求先序</h4><h5 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>后序遍历的最后一个字符一定是当下二叉树的根结点，先序遍历中根节点首先被遍历，所以每找到一个根节点就输出。在中序遍历中，根结点前面的是左子树，后面的是右子树，根据后序遍历的最后一个字符可以确定根，从而根据中序遍历确定左子树，从而根据左子树的大小从后序遍历中取出左子树，然后递归求解子树，右子树同理用递归求解</li>
+</ul>
+<h5 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">forw</span><span class="params">(string s1, string s2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!s<span class="number">1.</span><span class="built_in">size</span>()) <span class="keyword">return</span> ;</span><br><span class="line">	<span class="type">char</span> root = s2[s<span class="number">2.</span><span class="built_in">size</span>()<span class="number">-1</span>];</span><br><span class="line">	<span class="type">int</span> p = s<span class="number">1.f</span>ind(root);</span><br><span class="line">	std::cout&lt;&lt;root;</span><br><span class="line">	forw(s<span class="number">1.</span><span class="built_in">substr</span>(<span class="number">0</span>,p),s<span class="number">2.</span><span class="built_in">substr</span>(<span class="number">0</span>,p));</span><br><span class="line">	forw(s<span class="number">1.</span><span class="built_in">substr</span>(p<span class="number">+1</span>,std::string::npos),s<span class="number">2.</span><span class="built_in">substr</span>(p,s<span class="number">2.</span><span class="built_in">size</span>()-p<span class="number">-1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、已知先、后序遍历，求中序"><a href="#2、已知先、后序遍历，求中序" class="headerlink" title="2、已知先、后序遍历，求中序"></a>2、已知先、后序遍历，求中序</h4><h5 id="代码逻辑-1"><a href="#代码逻辑-1" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>考虑一棵树只有一个根结点和一个结点，那么它子结点为左和子结点为右结点时，得出的先、后序遍历不变</li>
+<li>如果树有一棵子树满足上述条件，那么子树有 2 种中序遍历，整棵树也就有 2 种中序遍历，根据乘法原理，如果树上有 k 个结点只有一个子结点，那么整棵树有 2^k^种中序遍历</li>
+<li>如果一个结点只有一个子结点，那么先序遍历时，子结点一定在它的后一位，后序遍历时，子结点一定在它的前一位</li>
+</ul>
+<h5 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pow = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=s<span class="number">1.l</span>ength()<span class="number">-2</span>;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=s<span class="number">2.l</span>ength()<span class="number">-1</span>;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span>( s1[i]==s2[j] &amp;&amp; s1[i<span class="number">+1</span>]==s2[j<span class="number">-1</span>] )</span><br><span class="line">               pow++;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">ans = (<span class="number">1</span>&lt;&lt;pow)</span><br></pre></td></tr></table></figure>
+
+<h2 id="树的直径"><a href="#树的直径" class="headerlink" title="树的直径"></a>树的直径</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>边具有权重，如果以权重代表距离，那么整棵树距离最远的两个结点的距离就是树的直径</p>
+<h3 id="代码逻辑-2"><a href="#代码逻辑-2" class="headerlink" title="代码逻辑"></a>代码逻辑</h3><ul>
+<li>以任意结点（比如 1 结点）为起点，dfs 求出各结点到 1 结点的距离，找到距离 1 结点最远的 far 结点</li>
+<li>以 far 结点为起点，dfs 求结点到 far 结点的距离，找到最大距离，最大距离就是树的直径</li>
+</ul>
+<h3 id="核心代码-2"><a href="#核心代码-2" class="headerlink" title="核心代码"></a>核心代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">( <span class="type">int</span> cur, <span class="type">int</span> fath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dist[cur] &gt; D)</span><br><span class="line">	&#123;</span><br><span class="line">		D = dist[cur];</span><br><span class="line">		far = cur;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>( <span class="type">int</span> ver : edge[cur])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(ver==fat)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		dist[ver] = dist[cur] + <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">dfs</span>(ver,cur);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h3><h4 id="1、城市规划"><a href="#1、城市规划" class="headerlink" title="1、城市规划"></a>1、城市规划</h4><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p>n 个城市有 n-1 条边，边权都视作 1，以 k 个城市组成核心城市，核心城市之间可以不经过普通城市相互联通，求其他城市到核心城市的最大距离的最小值</p>
+<h5 id="代码逻辑-3"><a href="#代码逻辑-3" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>先求直径，dfs 找到以任意结点为起点，离它最远的结点 far，然后用 dfs 求离 far 最远的结点，第二份 dfs 相比前一份 dfs 多一行代码，每次递归求子结点 dfs 之前先令 fa[ver] &#x3D; cur，留下回溯数组方便找直径中点</li>
+<li>直径中点作为核心城市的核心，其他所有结点都具有两个距离值，一个是自己到核心的距离，一个是自己联通的子结点距离核心最远的距离。为了让普通城市离核心城市群尽可能近，必须把自己到核心距离与子结点到核心最远距离的差值前 k-1 大的归为核心城市</li>
+</ul>
+<h5 id="核心代码-求直径留回溯"><a href="#核心代码-求直径留回溯" class="headerlink" title="核心代码_求直径留回溯"></a>核心代码_求直径留回溯</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">( <span class="type">int</span> cur, <span class="type">int</span> fat)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dist[cur] &gt; D)</span><br><span class="line">	&#123;</span><br><span class="line">		D = dist[cur];</span><br><span class="line">		far = cur;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ver : edge[cur])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(ver==fat)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		dist[ver] = dist[cur] + <span class="number">1</span>;</span><br><span class="line">		fa[ver] = cur;</span><br><span class="line">		<span class="built_in">dfs</span>(ver,cur);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="核心代码-回溯找直径中点"><a href="#核心代码-回溯找直径中点" class="headerlink" title="核心代码_回溯找直径中点"></a>核心代码_回溯找直径中点</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">center = far;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=( D + <span class="number">1</span> )/<span class="number">2</span>;i++)</span><br><span class="line">	center = fa[center];</span><br></pre></td></tr></table></figure>
+
+<h5 id="核心代码-核心距离、最深距离"><a href="#核心代码-核心距离、最深距离" class="headerlink" title="核心代码_核心距离、最深距离"></a>核心代码_核心距离、最深距离</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">( <span class="type">int</span> cur, <span class="type">int</span> fat)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	dist_max[cur] = dist[cur];</span><br><span class="line">	<span class="keyword">for</span>( <span class="type">int</span> ver : edge[cur])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(ver==fat)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		dist[ver] = dist[cur] + <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">dfs</span>(ver,cur);</span><br><span class="line">		dist_max[cur] = dist_max[ver] &gt; dist_max[cur] ? dist_max[ver] : dist_max[cur];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h2><h3 id="Kruskal"><a href="#Kruskal" class="headerlink" title="Kruskal"></a>Kruskal</h3><h4 id="例题-2"><a href="#例题-2" class="headerlink" title="例题"></a>例题</h4><p>N 个结点的图有 M 条无向有权边，判断能否生成一棵树，如果能则求出最小权重和</p>
+<h4 id="代码逻辑-4"><a href="#代码逻辑-4" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul>
+<li>将边从小到大遍历，如果边的两个结点不在同一个并查集中，就合并它们，合并的权重代价就是这条边的权重</li>
+</ul>
+<h4 id="核心代码-3"><a href="#核心代码-3" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Kruskal</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> 	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       	<span class="type">int</span> root1 = <span class="built_in">FindRoot</span>(edge[i].u), root2 = <span class="built_in">FindRoot</span>(edge[i].v);</span><br><span class="line">        <span class="keyword">if</span>(root1==root2)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">		root[root1] = root[root2];</span><br><span class="line">        ans += edge[i].w;</span><br><span class="line">        cnt++;</span><br><span class="line">        <span class="keyword">if</span>(cnt==n<span class="number">-1</span>)  <span class="comment">//合并n-1次并查集可以得到n个结点的树</span></span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Prime"><a href="#Prime" class="headerlink" title="Prime"></a>Prime</h3><h4 id="代码逻辑-5"><a href="#代码逻辑-5" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul>
+<li>起始让 1 结点入树，每当有结点入树就更新和它相连且未入树的结点到树的距离，每次找距离树最近的结点收入树中，无法用边联通的结点的距离视作 inf</li>
+<li>visited 判断结点是否已经入树</li>
+</ul>
+<h4 id="核心代码-4"><a href="#核心代码-4" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">prime</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">		dist[i] = inf;</span><br><span class="line">	<span class="keyword">for</span>(edge ver : e[<span class="number">1</span>])</span><br><span class="line">		dist[ver.to] = dist[ver.to] &lt; ver.weight ? dist[ver.to] : ver.weight;</span><br><span class="line">	<span class="type">int</span> now = <span class="number">1</span>, tot = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(++tot&lt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> min = inf;</span><br><span class="line">        visited[now] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visited[i] &amp;&amp; min&gt;dist[i])</span><br><span class="line">            &#123;</span><br><span class="line">                min = dist[i];</span><br><span class="line">				now = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">   	<span class="comment">//树中结点还没到n个，但已经找不到可以连接的结点了</span></span><br><span class="line">        <span class="keyword">if</span>(min==inf)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        ans+=min;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(edge ver : e[now])</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="keyword">if</span>(!visited[ver.to] &amp;&amp; dist[ver.to]&gt;ver.weight)</span><br><span class="line">        		dist[ver.to] = ver.weight;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="树上结点最近祖先（LCA）"><a href="#树上结点最近祖先（LCA）" class="headerlink" title="树上结点最近祖先（LCA）"></a>树上结点最近祖先（LCA）</h2><h3 id="例题-3"><a href="#例题-3" class="headerlink" title="例题"></a>例题</h3><h4 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h4><p>n 个结点的树，s 为根，查询任意两个结点的最近祖先</p>
+<h4 id="代码逻辑-6"><a href="#代码逻辑-6" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul>
+<li>先将两结点提到同一深度，然后一起向上回溯，回溯数组存 2 的幂次祖先，fa<del>now,i</del>表示从 now 向前回溯 2^i^得到的祖先</li>
+<li>无论是提到同一高度还是一起回溯，都按照 2 的幂次为单位向前跳，可以降低时间开销</li>
+<li>一起回溯时，从大到小遍历所有 2 的幂次级别的祖先结点，若不相同就跳。如果最近公共祖先是 x 结点，再向上看，两个结点上面的全部祖先结点肯定都相同</li>
+</ul>
+<h4 id="核心代码-预处理"><a href="#核心代码-预处理" class="headerlink" title="核心代码_预处理"></a>核心代码_预处理</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> now, <span class="type">int</span> fath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//求深度</span></span><br><span class="line">	depth[now] = depth[fath] + <span class="number">1</span>;</span><br><span class="line">	<span class="comment">//求回溯数组</span></span><br><span class="line">    fa[now][<span class="number">0</span>] = fath;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;= (<span class="type">int</span>)( <span class="built_in">log</span>(depth[now])/<span class="built_in">log</span>(<span class="number">2</span>) );i++)</span><br><span class="line">		fa[now][i] = fa[fa[now][i<span class="number">-1</span>]][i<span class="number">-1</span>];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> ver : edge[now])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(ver!=fath)</span><br><span class="line">			<span class="built_in">dfs</span>(ver,now);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="核心代码-LCA-主程序"><a href="#核心代码-LCA-主程序" class="headerlink" title="核心代码_LCA 主程序"></a>核心代码_LCA 主程序</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">LCA</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(depth[a]&lt;depth[b])</span><br><span class="line">		<span class="built_in">Swap</span>(a,b);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(depth[a]&gt;depth[b])</span><br><span class="line">		a = fa[a][log_2[depth[a]-depth[b]]<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">if</span>(a==b)</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=log_2[depth[a]]<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(fa[a][i]!=fa[b][i])</span><br><span class="line">			a = fa[a][i], b = fa[b][i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fa[a][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单源最短路径（Dijkstra）"><a href="#单源最短路径（Dijkstra）" class="headerlink" title="单源最短路径（Dijkstra）"></a>单源最短路径（Dijkstra）</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><ul>
+<li><strong>Dijkstra</strong>只能处理无负权图的单源最短路径问题</li>
+</ul>
+<h3 id="例题-4"><a href="#例题-4" class="headerlink" title="例题"></a>例题</h3><h4 id="1、有向有权图单源最短距离"><a href="#1、有向有权图单源最短距离" class="headerlink" title="1、有向有权图单源最短距离"></a>1、有向有权图单源最短距离</h4><h5 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h5><p>n 个结点 m 条边，以 s 为源点，求其它所有结点到它的最短距离</p>
+<h5 id="代码逻辑-7"><a href="#代码逻辑-7" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>辅助数据结构：优先队列 元素属性：队列中元素具有标号和距源点距离两个属性 排序方式：距离源点小的排前</li>
+<li>先让源点入队，每次循环从队列中弹出元素，更新它子结点到源点的距离，将被修改的子结点入队</li>
+<li>代码是广度优先搜索的逻辑，所以可能会出现同一个结点被修改多次，所以它会多次入队，由于是优先队列，只有第一次出队表示的才是它离源点的最短距离，所以用 visited 数组记录结点是否出过队</li>
+</ul>
+<h5 id="核心代码-5"><a href="#核心代码-5" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       q.<span class="built_in">push</span>( (node) &#123;s,<span class="number">0</span>&#125; );</span><br><span class="line">       <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="type">int</span> ind = q.<span class="built_in">top</span>().ind;</span><br><span class="line">           q.<span class="built_in">pop</span>();</span><br><span class="line">           <span class="keyword">if</span>(visited[ind])</span><br><span class="line">               <span class="keyword">continue</span>;</span><br><span class="line">           <span class="keyword">for</span>( edge ver : e[ind] )</span><br><span class="line">           &#123;</span><br><span class="line">    			<span class="keyword">if</span>( dist[ver.to] &gt; dist[ind] + ver.w ) <span class="comment">//满足if条件的必然没有出过队</span></span><br><span class="line">               &#123;</span><br><span class="line">                   dist[ver.to] = dist[ind] + ver.w;</span><br><span class="line">                   q.<span class="built_in">push</span>( (node) &#123; ver.to,dist[ver.to] &#125; );</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、无向无权图单源最短路"><a href="#2、无向无权图单源最短路" class="headerlink" title="2、无向无权图单源最短路"></a>2、无向无权图单源最短路</h4><h5 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h5><p>n 个结点 m 条边的无向无权图（边权都视作 1）以 1 为源点，求抵达任意点的最短路径的条数</p>
+<h5 id="代码逻辑-8"><a href="#代码逻辑-8" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>先初始化 dist<del>1</del>为 0，其它 dist 都为 inf，ans<del>1</del>为 1，其它 ans 为 0</li>
+<li>利用优先队列，使到源点距离小的排前，但优先队列默认小的排后，所以传值时，传入距离的相反数</li>
+<li>处理当下结点的子结点时，如果子结点 dist 大于当下结点 dist 再+1，那么说明从当下结点去到子结点才是去它的最短路径，赋值式更新子结的 ans，但如果子结点的 dist 原本就和当下结点的 dist 再+1 相等，由于每个结点只会 visit 一次，所以子结点的 dist 被另外一个父结点更新为了当下结点的 dist 再+1，由排列组合加法原理知子结点的 ans 应当加上当下结点的 ans</li>
+</ul>
+<h5 id="核心代码-6"><a href="#核心代码-6" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::priority_queue&lt; std::pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt; q;</span><br><span class="line">	q.<span class="built_in">push</span>( std::<span class="built_in">make_pair</span>(<span class="number">0</span>,<span class="number">1</span>) );</span><br><span class="line">	<span class="keyword">while</span>(q.<span class="built_in">size</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> pos = q.<span class="built_in">top</span>().second;</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(visited[pos])</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		visited[pos] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> ver : edge[pos])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[ver] &gt; dist[pos] + <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				dist[ver] = dist[pos] + <span class="number">1</span>;</span><br><span class="line">				ans[ver] = ans[pos];</span><br><span class="line">				q.<span class="built_in">push</span>( std::<span class="built_in">make_pair</span>(-dist[ver],ver) );</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(dist[ver] == dist[pos] + <span class="number">1</span>)</span><br><span class="line">				ans[ver] = ( ans[ver] + ans[pos] ) % mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="图上最小环"><a href="#图上最小环" class="headerlink" title="图上最小环"></a>图上最小环</h2><h3 id="例题-5"><a href="#例题-5" class="headerlink" title="例题"></a>例题</h3><h4 id="1、生日"><a href="#1、生日" class="headerlink" title="1、生日"></a>1、生日</h4><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>现在有 n 个人，起始时每个人只知道自己的生日，每个人都有一个信息传递对象，这个传递对象可以是自己，每一轮都会把自己知道的所有生日告诉传递对象，最少多少轮的时候会有人从别人口中听到自己的生日？</p>
+<h5 id="代码逻辑-9"><a href="#代码逻辑-9" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>这是一个找最小环的问题，因为每个人只有一个信息传递对象，所以环都是独立的</li>
+<li>初始化每个人的传递对象为自己，每输入一个传递对象就判断能否构成环，可以的话就更新答案，不行的话说明更新传递对象</li>
+<li>FindEnd 找到直线传递路径的终点，如果成环了，那么成环的结点的 nxt 不会被更新，所以它会导致 FindEnd 返回，也就是说，成环的结点就是直线传递路径的终点</li>
+</ul>
+<h5 id="核心代码-寻找直线传递路径终点"><a href="#核心代码-寻找直线传递路径终点" class="headerlink" title="核心代码_寻找直线传递路径终点"></a>核心代码_寻找直线传递路径终点</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">FindEnd</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       cnt++;  <span class="comment">//全局变量</span></span><br><span class="line">       <span class="keyword">if</span>(x==nxt[x])</span><br><span class="line">           <span class="keyword">return</span> x;</span><br><span class="line">      	<span class="keyword">return</span> <span class="built_in">FindEnd</span>(nxt[x]);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="核心代码-寻找最小环"><a href="#核心代码-寻找最小环" class="headerlink" title="核心代码_寻找最小环"></a>核心代码_寻找最小环</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">       nxt[i] = i;</span><br><span class="line">ans = inf;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="type">int</span> x;</span><br><span class="line">       cin&gt;&gt;x;</span><br><span class="line">       cnt = <span class="number">0</span>; <span class="comment">//全局变量</span></span><br><span class="line">       <span class="keyword">if</span>(<span class="built_in">FindEnd</span>(x)==i)</span><br><span class="line">           ans = <span class="built_in">min</span>(ans,cnt);</span><br><span class="line">      	<span class="keyword">else</span></span><br><span class="line">           nxt[i] = x;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="拓扑结构"><a href="#拓扑结构" class="headerlink" title="拓扑结构"></a>拓扑结构</h2><h3 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h3><p>拓扑结构关注结点之间的依赖关系</p>
+<h3 id="例题-6"><a href="#例题-6" class="headerlink" title="例题"></a>例题</h3><h4 id="1、工序时间"><a href="#1、工序时间" class="headerlink" title="1、工序时间"></a>1、工序时间</h4><h5 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h5><p>有 n 项事件待做，输入 n 行，表示事件的标号和花费时间和需要的准备工作的标号，工人无限，可以无限制并行完成任务，输出完成所有事件的最小时间</p>
+<h5 id="代码逻辑-10"><a href="#代码逻辑-10" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>利用入度数组 in 存下事件的前驱结点个数，如果入度为 0 了，就说明这件事情可以开始做了</li>
+<li>ans 数组存完成各事件的最小时间，最终的答案为数组的最大值</li>
+<li>入度为 0 的事件入队列，每次把出队列的对象的子结点的入度减 1，且更新它的 ans，同一个事件有多个前驱结点，ans 会被更新多次，必须取最大值，如果子结点的入度被减为 1，那么它入队列</li>
+</ul>
+<h5 id="核心代码-7"><a href="#核心代码-7" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">if</span>(in[i])</span><br><span class="line">       &#123;</span><br><span class="line">           q.<span class="built_in">push</span>(i);</span><br><span class="line">           ans[i] = t[i];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"><span class="keyword">while</span>(!q.<span class="built_in">empty</span>())</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="type">int</span> temp = q.<span class="built_in">top</span>();</span><br><span class="line">       q.<span class="built_in">pop</span>();</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> ver : edge[temp])</span><br><span class="line">       &#123;</span><br><span class="line">		ans[ver] = <span class="built_in">max</span>( ans[ver], ans[temp] + t[ver] );</span><br><span class="line">           in[ver]--;</span><br><span class="line">           <span class="keyword">if</span>(in[ver]==<span class="number">0</span>)</span><br><span class="line">               q.<span class="built_in">push</span>(ver);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、火车站分级"><a href="#2、火车站分级" class="headerlink" title="2、火车站分级"></a>2、火车站分级</h4><h5 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h5><p>有 n 个站点（编号 1 到 n）的火车站，每个站点都有一个级别，火车站内走过了 m 躺火车，这些火车都遵循一个原则：如果在某一个站停了车，那么后面凡是级别大于等于这个站的站点都要停车，现在已知 m 躺火车停过的站，求火车站的站点至少有几种级别</p>
+<h5 id="代码逻辑-11"><a href="#代码逻辑-11" class="headerlink" title="代码逻辑"></a>代码逻辑</h5><ul>
+<li>这是一个用拓扑排序分层次的问题</li>
+<li>火车停过的站之间没有停下的站的级别必然小于停过的站的级别，用 greater<del>i,j</del>表示 i 号站点级别是否大于 j 号站点，用 out 数组记录出度，out<del>i</del>存的是比 i 号站点级别小的站点的个数</li>
+<li>每一层级可能有多个站点，但是答案只关注层级的个数，每次循环消去一个层级，把答案加 1</li>
+</ul>
+<h5 id="核心代码-8"><a href="#核心代码-8" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> cnt,ans=<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">	ans++;</span><br><span class="line">	<span class="comment">//删除最低层的站点，记下被删的站点</span></span><br><span class="line">	cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(out[i]==<span class="number">0</span> &amp;&amp; !deleted[i])</span><br><span class="line">		&#123;</span><br><span class="line">			lowest[++cnt] = i;</span><br><span class="line">			deleted[i] = <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">//更新比被删除站点要高级的站点的出度</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(greater[j][lowest[i]])</span><br><span class="line">			&#123;</span><br><span class="line">				greater[j][lowest[i]] = <span class="literal">false</span>;</span><br><span class="line">				out[j]--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">while</span>(cnt); <span class="comment">//有执行删除操作才把答案加1，第一次进去的加1是多余的，所以ans初始化为-1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.countingstars.cc/2024/09/03/%E5%9B%BE%E8%AE%BA/" data-id="cm0mgxhd70000qytof7ia2noz" data-title="图论" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">动态规划</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/03/%E5%9B%BE%E8%AE%BA/">图论</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/Manacher%E7%AE%97%E6%B3%95/">Manacher算法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/">模式匹配算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Lios<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
