@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>设计模式：Proxy | countingstars</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Proxy概述用代理的形式访问对象 应用场景对于一个controller，调用它执行函数时将Tag切换到对应的页面 使用方法1export const Controller &#x3D; new Proxy(ControllerBase, handler);  其中ControllerBase是被代理的对象，而handler是代理的具体实现 123456789101112131415161718192021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式：Proxy">
+<meta property="og:url" content="https://blog.countingstars.cc/2024/09/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AProxy/index.html">
+<meta property="og:site_name" content="countingstars">
+<meta property="og:description" content="Proxy概述用代理的形式访问对象 应用场景对于一个controller，调用它执行函数时将Tag切换到对应的页面 使用方法1export const Controller &#x3D; new Proxy(ControllerBase, handler);  其中ControllerBase是被代理的对象，而handler是代理的具体实现 123456789101112131415161718192021">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-11T11:08:22.000Z">
+<meta property="article:modified_time" content="2024-09-11T11:08:57.778Z">
+<meta property="article:author" content="Lios">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="countingstars" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">countingstars</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"
+          ><span class="fa fa-bars"></span
+        ></a>
+        
+        <a class="main-nav-link" href="/"
+          >Home</a
+        >
+        
+        <a class="main-nav-link" href="/archives"
+          >Archives</a
+        >
+        
+        <a class="main-nav-link" href="/friends/link"
+          >FLink</a
+        >
+        
+      </nav>
+      <nav id="sub-nav">
+          
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.countingstars.cc"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-设计模式：Proxy" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AProxy/" class="article-date">
+  <time class="dt-published" datetime="2024-09-11T11:08:22.000Z" itemprop="datePublished">2024-09-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      设计模式：Proxy
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h1><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>用代理的形式访问对象</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>对于一个<code>controller</code>，调用它执行函数时将<code>Tag</code>切换到对应的页面</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Controller</span> = <span class="keyword">new</span> <span class="title class_">Proxy</span>(<span class="title class_">ControllerBase</span>, handler);</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>ControllerBase</code>是被代理的对象，而<code>handler</code>是代理的具体实现</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">COLOR_UPDATE_FUNCTION_NAME</span> = [<span class="string">&quot;updatePaletteInfos&quot;</span>, <span class="string">&quot;updateQuantization&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">EYE_UPDATE_FUNCTION_NAME</span> = [</span><br><span class="line">  <span class="string">&quot;updateEyeModel&quot;</span>,</span><br><span class="line">  <span class="string">&quot;updateEyeComponentColor&quot;</span>,</span><br><span class="line">  <span class="string">&quot;updateEyeSeperated&quot;</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">BASE_UPDATE_FUNCTION_NAME</span> = [<span class="string">&quot;updateBaseModel&quot;</span>, <span class="string">&quot;updateBaseColor&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">TRANSFORMCONTROLLER_UPDATE_FUNCTION_NAME</span> = [</span><br><span class="line">  <span class="string">&quot;updateModelPosition&quot;</span>,</span><br><span class="line">  <span class="string">&quot;updateModelRotation&quot;</span>,</span><br><span class="line">  <span class="string">&quot;updateModelScale&quot;</span>,</span><br><span class="line">  <span class="string">&quot;resetModel&quot;</span>,</span><br><span class="line">  <span class="string">&quot;resetUndo&quot;</span>,</span><br><span class="line">  <span class="string">&quot;lockedScale&quot;</span>,</span><br><span class="line">  <span class="string">&quot;lockedcaleModel&quot;</span>,</span><br><span class="line">  <span class="string">&quot;updateBaseSeperated&quot;</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">EMIT_SERIALIZE_FUNCTION_NAME</span> = [</span><br><span class="line">  ...<span class="variable constant_">EYE_UPDATE_FUNCTION_NAME</span>,</span><br><span class="line">  ...<span class="variable constant_">COLOR_UPDATE_FUNCTION_NAME</span>,</span><br><span class="line">  ...<span class="variable constant_">BASE_UPDATE_FUNCTION_NAME</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理模式，用于监听函数触发，统一进行调用。</span></span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="comment">//target是需要被代理的对象，receiver是代理本身</span></span><br><span class="line">  <span class="title function_">construct</span>(<span class="params"><span class="attr">target</span>: <span class="built_in">any</span>, <span class="attr">args</span>: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> instance = <span class="keyword">new</span> <span class="title function_">target</span>(...args);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(instance, &#123;</span><br><span class="line">      <span class="title function_">get</span>(<span class="params"><span class="attr">target</span>: <span class="built_in">any</span>, <span class="attr">prop</span>: <span class="built_in">string</span>, <span class="attr">receiver</span>: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="comment">//将this绑定到receiver而不是target</span></span><br><span class="line">        <span class="keyword">const</span> originalMethod = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, prop, receiver);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable constant_">EMIT_SERIALIZE_FUNCTION_NAME</span>.<span class="title function_">includes</span>(prop)) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="function">(<span class="params">...<span class="attr">args</span>: <span class="built_in">any</span>[]</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> result = originalMethod.<span class="title function_">apply</span>(receiver, args);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 对于不同的操作，会需要触发到不同的 tab.</span></span><br><span class="line">            <span class="keyword">let</span> targetStep = <span class="title class_">EditorStep</span>.<span class="property">COLOR</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable constant_">EYE_UPDATE_FUNCTION_NAME</span>.<span class="title function_">includes</span>(prop)) &#123;</span><br><span class="line">              targetStep = <span class="title class_">EditorStep</span>.<span class="property">EYES</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable constant_">BASE_UPDATE_FUNCTION_NAME</span>.<span class="title function_">includes</span>(prop)) &#123;</span><br><span class="line">              targetStep = <span class="title class_">EditorStep</span>.<span class="property">BASE</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable constant_">TRANSFORMCONTROLLER_UPDATE_FUNCTION_NAME</span>.<span class="title function_">includes</span>(prop)) &#123;</span><br><span class="line">              targetStep = <span class="title class_">EditorStep</span>.<span class="property">TRANSFORMCONTROLLER</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (receiver?.<span class="property">store</span>?.<span class="property">step</span> !== targetStep) &#123;</span><br><span class="line">              receiver?.<span class="property">store</span>?.<span class="title function_">setStep</span>(targetStep);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">          &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> originalMethod;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.countingstars.cc/2024/09/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AProxy/" data-id="cm0xrcx7e0000vuto217abc60" data-title="设计模式：Proxy" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/09/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AInvoker/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式：Invoker</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/11/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AProxy/">设计模式：Proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AInvoker/">设计模式：Invoker</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E6%90%9C%E7%B4%A2/">搜索</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%89%88%EF%BC%89/">动态规划（资源优化版）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/03/%E5%9B%BE%E8%AE%BA/">图论</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Lios<br />
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/friends/link" class="mobile-nav-link">FLink</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
